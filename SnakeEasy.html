@@ -215,14 +215,63 @@
     </script>
 
     <style>
+      body {
+        background-image: url("http://undergroundsa.net/images/home-fulllength-background.jpg");
+      }
+
+      #background {
+        width: 700px;
+        background-color: #0080ff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #ffffff;
+        margin: auto;
+        padding-top: 15px;
+      }
+
+      div.header {
+        width: 85%;
+        margin: auto;
+      }
+
+      h1.header {
+        font-size: 55pt;
+        margin: auto;
+        text-align: center;
+        border-radius: 20px;
+        font-family: Impact, Charcoal, sans-serif;
+        color: #000000;
+        text-shadow: 6px 6px 10px #b45f04;
+        width: 300px;
+        background: #444444;
+        box-shadow: 3px 3px 5px #b45f04;
+      }
+
+      #score {
+        font-size: 15pt;
+        font-family: Impact, Charcoal, sans-serif;
+        color: #e80000;
+        float: right;
+        text-shadow: 3px 3px 5px #000000;
+        background-color: #444444;
+        padding: 5px;
+        border-radius: 10px;
+        box-shadow: 3px 3px 5px #000000;
+        width: 120px;
+        position: relative;
+        top: 55px;
+        text-align: center;
+      }
+
       table {
-        //border-collapse: collapse;
         background-color: #01df01;
         border-radius: 5px;
         box-shadow: 0 0 10px #fe2ef7;
-        //border: #aaaaaa 1px emboss;
-        padding: 1px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 50px;
+        margin-top: 20px;
       }
+
       td {
         //border:black 1px solid;
         background-color: #dddddd;
@@ -232,833 +281,822 @@
         box-shadow: 1px 1px 1px #000000;
       }
 
-      body {
-        background-color: #0b0b61;
-      }
-      #background {
-        padding-left: 25px;
-        padding-bottom: 50px;
-        padding-top: 0px;
-        width: 660px;
-        background-color: #0080ff;
-        border-radius: 10px;
-        box-shadow: 0 0 10px #ffffff;
+      div.menu {
+        //background-color:black;
+        //border-radius:10px;
         margin-left: auto;
         margin-right: auto;
+        position: relative;
+        bottom: 12px;
+        width: 66%;
+        //background:#444444;
+        //box-shadow:3px 3px 5px #000000;
+        padding: 3px;
       }
 
-      h1.header {
-        font-size: 55pt;
-        position: relative;
-        left: 220px;
-        top: 30px;
+      a.menu {
+        background-color: #444444;
+        color: white;
+        text-decoration: none;
         font-family: Impact, Charcoal, sans-serif;
-        color: #00ff00;
-        text-shadow: 5px 5px 20px #b45f04;
+        font-size: 20pt;
+        text-shadow: 3px 3px 5px #000000;
+        margin: 7px;
+        padding: 5px;
+        border-radius: 10px;
+        box-shadow: 3px 3px 5px #000000;
+      }
+
+      a.menu:hover {
+        background-color: #777777;
+        //color:#000000;
+        //text-shadow: 3px 3px 5px #333333;
+        text-decoration: underline;
       }
 
       #clickAnyKey {
-        font-size: 40px;
+        font-size: 48pt;
         position: absolute;
-        left: 650px;
-        top: 250px;
+        left: 32%;
+        top: 30%;
         font-family: Impact, Charcoal, sans-serif;
-        color: #46d636;
-        text-shadow: 5px 5px 10px #000000;
+        color: #0080ff;
+        text-shadow: 5px 5px 15px #000000;
       }
 
       #gameOver {
-        font-size: 60pt;
+        font-size: 90pt;
         position: absolute;
-        left: 600px;
-        top: 250px;
+        left: 32%;
+        top: 20%;
         font-family: Impact, Charcoal, sans-serif;
         color: #e80000;
-        text-shadow: 5px 5px 10px #000000;
+        text-shadow: 5px 5px 15px #000000;
         visibility: hidden;
       }
-
-      #score {
-        font-size: 20pt;
-        position: absolute;
-        left: 1000px;
-        top: 100px;
-        font-family: Impact, Charcoal, sans-serif;
-        color: #e80000;
-        text-shadow: 5px 5px 10px #000000;
-      }
-
-      #reload {
-        font-size: 20pt;
-        background-color: black;
-        color: white;
-        border: solid 5px white;
-        border-radius: 15px;
-        position: absolute;
-        left: 750px;
-        top: 580px;
-        text-align: center;
-        padding-left: 5px;
-        padding-right: 5px;
-      }
-      #reload:hover {
-        color: black;
-        background-color: gray;
-      }
     </style>
-
-    <html>
-      <body>
-        <h1 id="clickAnyKey">Press any key to start</h1>
-        <h1 id="gameOver">Game Over!</h1>
-        <h1 id="score">Score: 0</h1>
-        <div id="background">
-          <h1 class="header">Snake</h1>
-          <table>
-            <tr>
-              <td id="r1c1"></td>
-              <td id="r1c2"></td>
-              <td id="r1c3"></td>
-              <td id="r1c4"></td>
-              <td id="r1c5"></td>
-              <td id="r1c6"></td>
-              <td id="r1c7"></td>
-              <td id="r1c8"></td>
-              <td id="r1c9"></td>
-              <td id="r1c10"></td>
-              <td id="r1c11"></td>
-              <td id="r1c12"></td>
-              <td id="r1c13"></td>
-              <td id="r1c14"></td>
-              <td id="r1c15"></td>
-              <td id="r1c16"></td>
-              <td id="r1c17"></td>
-              <td id="r1c18"></td>
-              <td id="r1c19"></td>
-              <td id="r1c20"></td>
-              <td id="r1c21"></td>
-              <td id="r1c22"></td>
-              <td id="r1c23"></td>
-              <td id="r1c24"></td>
-              <td id="r1c25"></td>
-              <td id="r1c26"></td>
-              <td id="r1c27"></td>
-              <td id="r1c28"></td>
-              <td id="r1c29"></td>
-              <td id="r1c30"></td>
-              <td id="r1c31"></td>
-              <td id="r1c32"></td>
-              <td id="r1c33"></td>
-              <td id="r1c34"></td>
-              <td id="r1c35"></td>
-            </tr>
-            <tr>
-              <td id="r2c1"></td>
-              <td id="r2c2"></td>
-              <td id="r2c3"></td>
-              <td id="r2c4"></td>
-              <td id="r2c5"></td>
-              <td id="r2c6"></td>
-              <td id="r2c7"></td>
-              <td id="r2c8"></td>
-              <td id="r2c9"></td>
-              <td id="r2c10"></td>
-              <td id="r2c11"></td>
-              <td id="r2c12"></td>
-              <td id="r2c13"></td>
-              <td id="r2c14"></td>
-              <td id="r2c15"></td>
-              <td id="r2c16"></td>
-              <td id="r2c17"></td>
-              <td id="r2c18"></td>
-              <td id="r2c19"></td>
-              <td id="r2c20"></td>
-              <td id="r2c21"></td>
-              <td id="r2c22"></td>
-              <td id="r2c23"></td>
-              <td id="r2c24"></td>
-              <td id="r2c25"></td>
-              <td id="r2c26"></td>
-              <td id="r2c27"></td>
-              <td id="r2c28"></td>
-              <td id="r2c29"></td>
-              <td id="r2c30"></td>
-              <td id="r2c31"></td>
-              <td id="r2c32"></td>
-              <td id="r2c33"></td>
-              <td id="r2c34"></td>
-              <td id="r2c35"></td>
-            </tr>
-            <tr>
-              <td id="r3c1"></td>
-              <td id="r3c2"></td>
-              <td id="r3c3"></td>
-              <td id="r3c4"></td>
-              <td id="r3c5"></td>
-              <td id="r3c6"></td>
-              <td id="r3c7"></td>
-              <td id="r3c8"></td>
-              <td id="r3c9"></td>
-              <td id="r3c10"></td>
-              <td id="r3c11"></td>
-              <td id="r3c12"></td>
-              <td id="r3c13"></td>
-              <td id="r3c14"></td>
-              <td id="r3c15"></td>
-              <td id="r3c16"></td>
-              <td id="r3c17"></td>
-              <td id="r3c18"></td>
-              <td id="r3c19"></td>
-              <td id="r3c20"></td>
-              <td id="r3c21"></td>
-              <td id="r3c22"></td>
-              <td id="r3c23"></td>
-              <td id="r3c24"></td>
-              <td id="r3c25"></td>
-              <td id="r3c26"></td>
-              <td id="r3c27"></td>
-              <td id="r3c28"></td>
-              <td id="r3c29"></td>
-              <td id="r3c30"></td>
-              <td id="r3c31"></td>
-              <td id="r3c32"></td>
-              <td id="r3c33"></td>
-              <td id="r3c34"></td>
-              <td id="r3c35"></td>
-            </tr>
-            <tr>
-              <td id="r4c1"></td>
-              <td id="r4c2"></td>
-              <td id="r4c3"></td>
-              <td id="r4c4"></td>
-              <td id="r4c5"></td>
-              <td id="r4c6"></td>
-              <td id="r4c7"></td>
-              <td id="r4c8"></td>
-              <td id="r4c9"></td>
-              <td id="r4c10"></td>
-              <td id="r4c11"></td>
-              <td id="r4c12"></td>
-              <td id="r4c13"></td>
-              <td id="r4c14"></td>
-              <td id="r4c15"></td>
-              <td id="r4c16"></td>
-              <td id="r4c17"></td>
-              <td id="r4c18"></td>
-              <td id="r4c19"></td>
-              <td id="r4c20"></td>
-              <td id="r4c21"></td>
-              <td id="r4c22"></td>
-              <td id="r4c23"></td>
-              <td id="r4c24"></td>
-              <td id="r4c25"></td>
-              <td id="r4c26"></td>
-              <td id="r4c27"></td>
-              <td id="r4c28"></td>
-              <td id="r4c29"></td>
-              <td id="r4c30"></td>
-              <td id="r4c31"></td>
-              <td id="r4c32"></td>
-              <td id="r4c33"></td>
-              <td id="r4c34"></td>
-              <td id="r4c35"></td>
-            </tr>
-            <tr>
-              <td id="r5c1"></td>
-              <td id="r5c2"></td>
-              <td id="r5c3"></td>
-              <td id="r5c4"></td>
-              <td id="r5c5"></td>
-              <td id="r5c6"></td>
-              <td id="r5c7"></td>
-              <td id="r5c8"></td>
-              <td id="r5c9"></td>
-              <td id="r5c10"></td>
-              <td id="r5c11"></td>
-              <td id="r5c12"></td>
-              <td id="r5c13"></td>
-              <td id="r5c14"></td>
-              <td id="r5c15"></td>
-              <td id="r5c16"></td>
-              <td id="r5c17"></td>
-              <td id="r5c18"></td>
-              <td id="r5c19"></td>
-              <td id="r5c20"></td>
-              <td id="r5c21"></td>
-              <td id="r5c22"></td>
-              <td id="r5c23"></td>
-              <td id="r5c24"></td>
-              <td id="r5c25"></td>
-              <td id="r5c26"></td>
-              <td id="r5c27"></td>
-              <td id="r5c28"></td>
-              <td id="r5c29"></td>
-              <td id="r5c30"></td>
-              <td id="r5c31"></td>
-              <td id="r5c32"></td>
-              <td id="r5c33"></td>
-              <td id="r5c34"></td>
-              <td id="r5c35"></td>
-            </tr>
-            <tr>
-              <td id="r6c1"></td>
-              <td id="r6c2"></td>
-              <td id="r6c3"></td>
-              <td id="r6c4"></td>
-              <td id="r6c5"></td>
-              <td id="r6c6"></td>
-              <td id="r6c7"></td>
-              <td id="r6c8"></td>
-              <td id="r6c9"></td>
-              <td id="r6c10"></td>
-              <td id="r6c11"></td>
-              <td id="r6c12"></td>
-              <td id="r6c13"></td>
-              <td id="r6c14"></td>
-              <td id="r6c15"></td>
-              <td id="r6c16"></td>
-              <td id="r6c17"></td>
-              <td id="r6c18"></td>
-              <td id="r6c19"></td>
-              <td id="r6c20"></td>
-              <td id="r6c21"></td>
-              <td id="r6c22"></td>
-              <td id="r6c23"></td>
-              <td id="r6c24"></td>
-              <td id="r6c25"></td>
-              <td id="r6c26"></td>
-              <td id="r6c27"></td>
-              <td id="r6c28"></td>
-              <td id="r6c29"></td>
-              <td id="r6c30"></td>
-              <td id="r6c31"></td>
-              <td id="r6c32"></td>
-              <td id="r6c33"></td>
-              <td id="r6c34"></td>
-              <td id="r6c35"></td>
-            </tr>
-            <tr>
-              <td id="r7c1"></td>
-              <td id="r7c2"></td>
-              <td id="r7c3"></td>
-              <td id="r7c4"></td>
-              <td id="r7c5"></td>
-              <td id="r7c6"></td>
-              <td id="r7c7"></td>
-              <td id="r7c8"></td>
-              <td id="r7c9"></td>
-              <td id="r7c10"></td>
-              <td id="r7c11"></td>
-              <td id="r7c12"></td>
-              <td id="r7c13"></td>
-              <td id="r7c14"></td>
-              <td id="r7c15"></td>
-              <td id="r7c16"></td>
-              <td id="r7c17"></td>
-              <td id="r7c18"></td>
-              <td id="r7c19"></td>
-              <td id="r7c20"></td>
-              <td id="r7c21"></td>
-              <td id="r7c22"></td>
-              <td id="r7c23"></td>
-              <td id="r7c24"></td>
-              <td id="r7c25"></td>
-              <td id="r7c26"></td>
-              <td id="r7c27"></td>
-              <td id="r7c28"></td>
-              <td id="r7c29"></td>
-              <td id="r7c30"></td>
-              <td id="r7c31"></td>
-              <td id="r7c32"></td>
-              <td id="r7c33"></td>
-              <td id="r7c34"></td>
-              <td id="r7c35"></td>
-            </tr>
-            <tr>
-              <td id="r8c1"></td>
-              <td id="r8c2"></td>
-              <td id="r8c3"></td>
-              <td id="r8c4"></td>
-              <td id="r8c5"></td>
-              <td id="r8c6"></td>
-              <td id="r8c7"></td>
-              <td id="r8c8"></td>
-              <td id="r8c9"></td>
-              <td id="r8c10"></td>
-              <td id="r8c11"></td>
-              <td id="r8c12"></td>
-              <td id="r8c13"></td>
-              <td id="r8c14"></td>
-              <td id="r8c15"></td>
-              <td id="r8c16"></td>
-              <td id="r8c17"></td>
-              <td id="r8c18"></td>
-              <td id="r8c19"></td>
-              <td id="r8c20"></td>
-              <td id="r8c21"></td>
-              <td id="r8c22"></td>
-              <td id="r8c23"></td>
-              <td id="r8c24"></td>
-              <td id="r8c25"></td>
-              <td id="r8c26"></td>
-              <td id="r8c27"></td>
-              <td id="r8c28"></td>
-              <td id="r8c29"></td>
-              <td id="r8c30"></td>
-              <td id="r8c31"></td>
-              <td id="r8c32"></td>
-              <td id="r8c33"></td>
-              <td id="r8c34"></td>
-              <td id="r8c35"></td>
-            </tr>
-            <tr>
-              <td id="r9c1"></td>
-              <td id="r9c2"></td>
-              <td id="r9c3"></td>
-              <td id="r9c4"></td>
-              <td id="r9c5"></td>
-              <td id="r9c6"></td>
-              <td id="r9c7"></td>
-              <td id="r9c8"></td>
-              <td id="r9c9"></td>
-              <td id="r9c10"></td>
-              <td id="r9c11"></td>
-              <td id="r9c12"></td>
-              <td id="r9c13"></td>
-              <td id="r9c14"></td>
-              <td id="r9c15"></td>
-              <td id="r9c16"></td>
-              <td id="r9c17"></td>
-              <td id="r9c18"></td>
-              <td id="r9c19"></td>
-              <td id="r9c20"></td>
-              <td id="r9c21"></td>
-              <td id="r9c22"></td>
-              <td id="r9c23"></td>
-              <td id="r9c24"></td>
-              <td id="r9c25"></td>
-              <td id="r9c26"></td>
-              <td id="r9c27"></td>
-              <td id="r9c28"></td>
-              <td id="r9c29"></td>
-              <td id="r9c30"></td>
-              <td id="r9c31"></td>
-              <td id="r9c32"></td>
-              <td id="r9c33"></td>
-              <td id="r9c34"></td>
-              <td id="r9c35"></td>
-            </tr>
-            <tr>
-              <td id="r10c1"></td>
-              <td id="r10c2"></td>
-              <td id="r10c3"></td>
-              <td id="r10c4"></td>
-              <td id="r10c5"></td>
-              <td id="r10c6"></td>
-              <td id="r10c7"></td>
-              <td id="r10c8"></td>
-              <td id="r10c9"></td>
-              <td id="r10c10"></td>
-              <td id="r10c11"></td>
-              <td id="r10c12"></td>
-              <td id="r10c13"></td>
-              <td id="r10c14"></td>
-              <td id="r10c15"></td>
-              <td id="r10c16"></td>
-              <td id="r10c17"></td>
-              <td id="r10c18"></td>
-              <td id="r10c19"></td>
-              <td id="r10c20"></td>
-              <td id="r10c21"></td>
-              <td id="r10c22"></td>
-              <td id="r10c23"></td>
-              <td id="r10c24"></td>
-              <td id="r10c25"></td>
-              <td id="r10c26"></td>
-              <td id="r10c27"></td>
-              <td id="r10c28"></td>
-              <td id="r10c29"></td>
-              <td id="r10c30"></td>
-              <td id="r10c31"></td>
-              <td id="r10c32"></td>
-              <td id="r10c33"></td>
-              <td id="r10c34"></td>
-              <td id="r10c35"></td>
-            </tr>
-            <tr>
-              <td id="r11c1"></td>
-              <td id="r11c2"></td>
-              <td id="r11c3"></td>
-              <td id="r11c4"></td>
-              <td id="r11c5"></td>
-              <td id="r11c6"></td>
-              <td id="r11c7"></td>
-              <td id="r11c8"></td>
-              <td id="r11c9"></td>
-              <td id="r11c10"></td>
-              <td id="r11c11"></td>
-              <td id="r11c12"></td>
-              <td id="r11c13"></td>
-              <td id="r11c14"></td>
-              <td id="r11c15"></td>
-              <td id="r11c16"></td>
-              <td id="r11c17"></td>
-              <td id="r11c18"></td>
-              <td id="r11c19"></td>
-              <td id="r11c20"></td>
-              <td id="r11c21"></td>
-              <td id="r11c22"></td>
-              <td id="r11c23"></td>
-              <td id="r11c24"></td>
-              <td id="r11c25"></td>
-              <td id="r11c26"></td>
-              <td id="r11c27"></td>
-              <td id="r11c28"></td>
-              <td id="r11c29"></td>
-              <td id="r11c30"></td>
-              <td id="r11c31"></td>
-              <td id="r11c32"></td>
-              <td id="r11c33"></td>
-              <td id="r11c34"></td>
-              <td id="r11c35"></td>
-            </tr>
-            <tr>
-              <td id="r12c1"></td>
-              <td id="r12c2"></td>
-              <td id="r12c3"></td>
-              <td id="r12c4"></td>
-              <td id="r12c5"></td>
-              <td id="r12c6"></td>
-              <td id="r12c7"></td>
-              <td id="r12c8"></td>
-              <td id="r12c9"></td>
-              <td id="r12c10"></td>
-              <td id="r12c11"></td>
-              <td id="r12c12"></td>
-              <td id="r12c13"></td>
-              <td id="r12c14"></td>
-              <td id="r12c15"></td>
-              <td id="r12c16"></td>
-              <td id="r12c17"></td>
-              <td id="r12c18"></td>
-              <td id="r12c19"></td>
-              <td id="r12c20"></td>
-              <td id="r12c21"></td>
-              <td id="r12c22"></td>
-              <td id="r12c23"></td>
-              <td id="r12c24"></td>
-              <td id="r12c25"></td>
-              <td id="r12c26"></td>
-              <td id="r12c27"></td>
-              <td id="r12c28"></td>
-              <td id="r12c29"></td>
-              <td id="r12c30"></td>
-              <td id="r12c31"></td>
-              <td id="r12c32"></td>
-              <td id="r12c33"></td>
-              <td id="r12c34"></td>
-              <td id="r12c35"></td>
-            </tr>
-            <tr>
-              <td id="r13c1"></td>
-              <td id="r13c2"></td>
-              <td id="r13c3"></td>
-              <td id="r13c4"></td>
-              <td id="r13c5"></td>
-              <td id="r13c6"></td>
-              <td id="r13c7"></td>
-              <td id="r13c8"></td>
-              <td id="r13c9"></td>
-              <td id="r13c10"></td>
-              <td id="r13c11"></td>
-              <td id="r13c12"></td>
-              <td id="r13c13"></td>
-              <td id="r13c14"></td>
-              <td id="r13c15"></td>
-              <td id="r13c16"></td>
-              <td id="r13c17"></td>
-              <td id="r13c18"></td>
-              <td id="r13c19"></td>
-              <td id="r13c20"></td>
-              <td id="r13c21"></td>
-              <td id="r13c22"></td>
-              <td id="r13c23"></td>
-              <td id="r13c24"></td>
-              <td id="r13c25"></td>
-              <td id="r13c26"></td>
-              <td id="r13c27"></td>
-              <td id="r13c28"></td>
-              <td id="r13c29"></td>
-              <td id="r13c30"></td>
-              <td id="r13c31"></td>
-              <td id="r13c32"></td>
-              <td id="r13c33"></td>
-              <td id="r13c34"></td>
-              <td id="r13c35"></td>
-            </tr>
-            <tr>
-              <td id="r14c1"></td>
-              <td id="r14c2"></td>
-              <td id="r14c3"></td>
-              <td id="r14c4"></td>
-              <td id="r14c5"></td>
-              <td id="r14c6"></td>
-              <td id="r14c7"></td>
-              <td id="r14c8"></td>
-              <td id="r14c9"></td>
-              <td id="r14c10"></td>
-              <td id="r14c11"></td>
-              <td id="r14c12"></td>
-              <td id="r14c13"></td>
-              <td id="r14c14"></td>
-              <td id="r14c15"></td>
-              <td id="r14c16"></td>
-              <td id="r14c17"></td>
-              <td id="r14c18"></td>
-              <td id="r14c19"></td>
-              <td id="r14c20"></td>
-              <td id="r14c21"></td>
-              <td id="r14c22"></td>
-              <td id="r14c23"></td>
-              <td id="r14c24"></td>
-              <td id="r14c25"></td>
-              <td id="r14c26"></td>
-              <td id="r14c27"></td>
-              <td id="r14c28"></td>
-              <td id="r14c29"></td>
-              <td id="r14c30"></td>
-              <td id="r14c31"></td>
-              <td id="r14c32"></td>
-              <td id="r14c33"></td>
-              <td id="r14c34"></td>
-              <td id="r14c35"></td>
-            </tr>
-            <tr>
-              <td id="r15c1"></td>
-              <td id="r15c2"></td>
-              <td id="r15c3"></td>
-              <td id="r15c4"></td>
-              <td id="r15c5"></td>
-              <td id="r15c6"></td>
-              <td id="r15c7"></td>
-              <td id="r15c8"></td>
-              <td id="r15c9"></td>
-              <td id="r15c10"></td>
-              <td id="r15c11"></td>
-              <td id="r15c12"></td>
-              <td id="r15c13"></td>
-              <td id="r15c14"></td>
-              <td id="r15c15"></td>
-              <td id="r15c16"></td>
-              <td id="r15c17"></td>
-              <td id="r15c18"></td>
-              <td id="r15c19"></td>
-              <td id="r15c20"></td>
-              <td id="r15c21"></td>
-              <td id="r15c22"></td>
-              <td id="r15c23"></td>
-              <td id="r15c24"></td>
-              <td id="r15c25"></td>
-              <td id="r15c26"></td>
-              <td id="r15c27"></td>
-              <td id="r15c28"></td>
-              <td id="r15c29"></td>
-              <td id="r15c30"></td>
-              <td id="r15c31"></td>
-              <td id="r15c32"></td>
-              <td id="r15c33"></td>
-              <td id="r15c34"></td>
-              <td id="r15c35"></td>
-            </tr>
-            <tr>
-              <td id="r16c1"></td>
-              <td id="r16c2"></td>
-              <td id="r16c3"></td>
-              <td id="r16c4"></td>
-              <td id="r16c5"></td>
-              <td id="r16c6"></td>
-              <td id="r16c7"></td>
-              <td id="r16c8"></td>
-              <td id="r16c9"></td>
-              <td id="r16c10"></td>
-              <td id="r16c11"></td>
-              <td id="r16c12"></td>
-              <td id="r16c13"></td>
-              <td id="r16c14"></td>
-              <td id="r16c15"></td>
-              <td id="r16c16"></td>
-              <td id="r16c17"></td>
-              <td id="r16c18"></td>
-              <td id="r16c19"></td>
-              <td id="r16c20"></td>
-              <td id="r16c21"></td>
-              <td id="r16c22"></td>
-              <td id="r16c23"></td>
-              <td id="r16c24"></td>
-              <td id="r16c25"></td>
-              <td id="r16c26"></td>
-              <td id="r16c27"></td>
-              <td id="r16c28"></td>
-              <td id="r16c29"></td>
-              <td id="r16c30"></td>
-              <td id="r16c31"></td>
-              <td id="r16c32"></td>
-              <td id="r16c33"></td>
-              <td id="r16c34"></td>
-              <td id="r16c35"></td>
-            </tr>
-            <tr>
-              <td id="r17c1"></td>
-              <td id="r17c2"></td>
-              <td id="r17c3"></td>
-              <td id="r17c4"></td>
-              <td id="r17c5"></td>
-              <td id="r17c6"></td>
-              <td id="r17c7"></td>
-              <td id="r17c8"></td>
-              <td id="r17c9"></td>
-              <td id="r17c10"></td>
-              <td id="r17c11"></td>
-              <td id="r17c12"></td>
-              <td id="r17c13"></td>
-              <td id="r17c14"></td>
-              <td id="r17c15"></td>
-              <td id="r17c16"></td>
-              <td id="r17c17"></td>
-              <td id="r17c18"></td>
-              <td id="r17c19"></td>
-              <td id="r17c20"></td>
-              <td id="r17c21"></td>
-              <td id="r17c22"></td>
-              <td id="r17c23"></td>
-              <td id="r17c24"></td>
-              <td id="r17c25"></td>
-              <td id="r17c26"></td>
-              <td id="r17c27"></td>
-              <td id="r17c28"></td>
-              <td id="r17c29"></td>
-              <td id="r17c30"></td>
-              <td id="r17c31"></td>
-              <td id="r17c32"></td>
-              <td id="r17c33"></td>
-              <td id="r17c34"></td>
-              <td id="r17c35"></td>
-            </tr>
-            <tr>
-              <td id="r18c1"></td>
-              <td id="r18c2"></td>
-              <td id="r18c3"></td>
-              <td id="r18c4"></td>
-              <td id="r18c5"></td>
-              <td id="r18c6"></td>
-              <td id="r18c7"></td>
-              <td id="r18c8"></td>
-              <td id="r18c9"></td>
-              <td id="r18c10"></td>
-              <td id="r18c11"></td>
-              <td id="r18c12"></td>
-              <td id="r18c13"></td>
-              <td id="r18c14"></td>
-              <td id="r18c15"></td>
-              <td id="r18c16"></td>
-              <td id="r18c17"></td>
-              <td id="r18c18"></td>
-              <td id="r18c19"></td>
-              <td id="r18c20"></td>
-              <td id="r18c21"></td>
-              <td id="r18c22"></td>
-              <td id="r18c23"></td>
-              <td id="r18c24"></td>
-              <td id="r18c25"></td>
-              <td id="r18c26"></td>
-              <td id="r18c27"></td>
-              <td id="r18c28"></td>
-              <td id="r18c29"></td>
-              <td id="r18c30"></td>
-              <td id="r18c31"></td>
-              <td id="r18c32"></td>
-              <td id="r18c33"></td>
-              <td id="r18c34"></td>
-              <td id="r18c35"></td>
-            </tr>
-            <tr>
-              <td id="r19c1"></td>
-              <td id="r19c2"></td>
-              <td id="r19c3"></td>
-              <td id="r19c4"></td>
-              <td id="r19c5"></td>
-              <td id="r19c6"></td>
-              <td id="r19c7"></td>
-              <td id="r19c8"></td>
-              <td id="r19c9"></td>
-              <td id="r19c10"></td>
-              <td id="r19c11"></td>
-              <td id="r19c12"></td>
-              <td id="r19c13"></td>
-              <td id="r19c14"></td>
-              <td id="r19c15"></td>
-              <td id="r19c16"></td>
-              <td id="r19c17"></td>
-              <td id="r19c18"></td>
-              <td id="r19c19"></td>
-              <td id="r19c20"></td>
-              <td id="r19c21"></td>
-              <td id="r19c22"></td>
-              <td id="r19c23"></td>
-              <td id="r19c24"></td>
-              <td id="r19c25"></td>
-              <td id="r19c26"></td>
-              <td id="r19c27"></td>
-              <td id="r19c28"></td>
-              <td id="r19c29"></td>
-              <td id="r19c30"></td>
-              <td id="r19c31"></td>
-              <td id="r19c32"></td>
-              <td id="r19c33"></td>
-              <td id="r19c34"></td>
-              <td id="r19c35"></td>
-            </tr>
-            <tr>
-              <td id="r20c1"></td>
-              <td id="r20c2"></td>
-              <td id="r20c3"></td>
-              <td id="r20c4"></td>
-              <td id="r20c5"></td>
-              <td id="r20c6"></td>
-              <td id="r20c7"></td>
-              <td id="r20c8"></td>
-              <td id="r20c9"></td>
-              <td id="r20c10"></td>
-              <td id="r20c11"></td>
-              <td id="r20c12"></td>
-              <td id="r20c13"></td>
-              <td id="r20c14"></td>
-              <td id="r20c15"></td>
-              <td id="r20c16"></td>
-              <td id="r20c17"></td>
-              <td id="r20c18"></td>
-              <td id="r20c19"></td>
-              <td id="r20c20"></td>
-              <td id="r20c21"></td>
-              <td id="r20c22"></td>
-              <td id="r20c23"></td>
-              <td id="r20c24"></td>
-              <td id="r20c25"></td>
-              <td id="r20c26"></td>
-              <td id="r20c27"></td>
-              <td id="r20c28"></td>
-              <td id="r20c29"></td>
-              <td id="r20c30"></td>
-              <td id="r20c31"></td>
-              <td id="r20c32"></td>
-              <td id="r20c33"></td>
-              <td id="r20c34"></td>
-              <td id="r20c35"></td>
-            </tr>
-          </table>
-          <a id="reload">Reload</a>
-        </div>
-      </body>
-    </html>
   </head>
+  <body>
+    <h1 id="clickAnyKey">Press any key to start</h1>
+    <h1 id="gameOver">Game Over!</h1>
+
+    <div id="background">
+      <div class="header">
+        <span id="score">Score: 0</span>
+
+        <h1 class="header">Snake</h1>
+      </div>
+
+      <table>
+        <tr>
+          <td id="r1c1"></td>
+          <td id="r1c2"></td>
+          <td id="r1c3"></td>
+          <td id="r1c4"></td>
+          <td id="r1c5"></td>
+          <td id="r1c6"></td>
+          <td id="r1c7"></td>
+          <td id="r1c8"></td>
+          <td id="r1c9"></td>
+          <td id="r1c10"></td>
+          <td id="r1c11"></td>
+          <td id="r1c12"></td>
+          <td id="r1c13"></td>
+          <td id="r1c14"></td>
+          <td id="r1c15"></td>
+          <td id="r1c16"></td>
+          <td id="r1c17"></td>
+          <td id="r1c18"></td>
+          <td id="r1c19"></td>
+          <td id="r1c20"></td>
+          <td id="r1c21"></td>
+          <td id="r1c22"></td>
+          <td id="r1c23"></td>
+          <td id="r1c24"></td>
+          <td id="r1c25"></td>
+          <td id="r1c26"></td>
+          <td id="r1c27"></td>
+          <td id="r1c28"></td>
+          <td id="r1c29"></td>
+          <td id="r1c30"></td>
+          <td id="r1c31"></td>
+          <td id="r1c32"></td>
+          <td id="r1c33"></td>
+          <td id="r1c34"></td>
+          <td id="r1c35"></td>
+        </tr>
+        <tr>
+          <td id="r2c1"></td>
+          <td id="r2c2"></td>
+          <td id="r2c3"></td>
+          <td id="r2c4"></td>
+          <td id="r2c5"></td>
+          <td id="r2c6"></td>
+          <td id="r2c7"></td>
+          <td id="r2c8"></td>
+          <td id="r2c9"></td>
+          <td id="r2c10"></td>
+          <td id="r2c11"></td>
+          <td id="r2c12"></td>
+          <td id="r2c13"></td>
+          <td id="r2c14"></td>
+          <td id="r2c15"></td>
+          <td id="r2c16"></td>
+          <td id="r2c17"></td>
+          <td id="r2c18"></td>
+          <td id="r2c19"></td>
+          <td id="r2c20"></td>
+          <td id="r2c21"></td>
+          <td id="r2c22"></td>
+          <td id="r2c23"></td>
+          <td id="r2c24"></td>
+          <td id="r2c25"></td>
+          <td id="r2c26"></td>
+          <td id="r2c27"></td>
+          <td id="r2c28"></td>
+          <td id="r2c29"></td>
+          <td id="r2c30"></td>
+          <td id="r2c31"></td>
+          <td id="r2c32"></td>
+          <td id="r2c33"></td>
+          <td id="r2c34"></td>
+          <td id="r2c35"></td>
+        </tr>
+        <tr>
+          <td id="r3c1"></td>
+          <td id="r3c2"></td>
+          <td id="r3c3"></td>
+          <td id="r3c4"></td>
+          <td id="r3c5"></td>
+          <td id="r3c6"></td>
+          <td id="r3c7"></td>
+          <td id="r3c8"></td>
+          <td id="r3c9"></td>
+          <td id="r3c10"></td>
+          <td id="r3c11"></td>
+          <td id="r3c12"></td>
+          <td id="r3c13"></td>
+          <td id="r3c14"></td>
+          <td id="r3c15"></td>
+          <td id="r3c16"></td>
+          <td id="r3c17"></td>
+          <td id="r3c18"></td>
+          <td id="r3c19"></td>
+          <td id="r3c20"></td>
+          <td id="r3c21"></td>
+          <td id="r3c22"></td>
+          <td id="r3c23"></td>
+          <td id="r3c24"></td>
+          <td id="r3c25"></td>
+          <td id="r3c26"></td>
+          <td id="r3c27"></td>
+          <td id="r3c28"></td>
+          <td id="r3c29"></td>
+          <td id="r3c30"></td>
+          <td id="r3c31"></td>
+          <td id="r3c32"></td>
+          <td id="r3c33"></td>
+          <td id="r3c34"></td>
+          <td id="r3c35"></td>
+        </tr>
+        <tr>
+          <td id="r4c1"></td>
+          <td id="r4c2"></td>
+          <td id="r4c3"></td>
+          <td id="r4c4"></td>
+          <td id="r4c5"></td>
+          <td id="r4c6"></td>
+          <td id="r4c7"></td>
+          <td id="r4c8"></td>
+          <td id="r4c9"></td>
+          <td id="r4c10"></td>
+          <td id="r4c11"></td>
+          <td id="r4c12"></td>
+          <td id="r4c13"></td>
+          <td id="r4c14"></td>
+          <td id="r4c15"></td>
+          <td id="r4c16"></td>
+          <td id="r4c17"></td>
+          <td id="r4c18"></td>
+          <td id="r4c19"></td>
+          <td id="r4c20"></td>
+          <td id="r4c21"></td>
+          <td id="r4c22"></td>
+          <td id="r4c23"></td>
+          <td id="r4c24"></td>
+          <td id="r4c25"></td>
+          <td id="r4c26"></td>
+          <td id="r4c27"></td>
+          <td id="r4c28"></td>
+          <td id="r4c29"></td>
+          <td id="r4c30"></td>
+          <td id="r4c31"></td>
+          <td id="r4c32"></td>
+          <td id="r4c33"></td>
+          <td id="r4c34"></td>
+          <td id="r4c35"></td>
+        </tr>
+        <tr>
+          <td id="r5c1"></td>
+          <td id="r5c2"></td>
+          <td id="r5c3"></td>
+          <td id="r5c4"></td>
+          <td id="r5c5"></td>
+          <td id="r5c6"></td>
+          <td id="r5c7"></td>
+          <td id="r5c8"></td>
+          <td id="r5c9"></td>
+          <td id="r5c10"></td>
+          <td id="r5c11"></td>
+          <td id="r5c12"></td>
+          <td id="r5c13"></td>
+          <td id="r5c14"></td>
+          <td id="r5c15"></td>
+          <td id="r5c16"></td>
+          <td id="r5c17"></td>
+          <td id="r5c18"></td>
+          <td id="r5c19"></td>
+          <td id="r5c20"></td>
+          <td id="r5c21"></td>
+          <td id="r5c22"></td>
+          <td id="r5c23"></td>
+          <td id="r5c24"></td>
+          <td id="r5c25"></td>
+          <td id="r5c26"></td>
+          <td id="r5c27"></td>
+          <td id="r5c28"></td>
+          <td id="r5c29"></td>
+          <td id="r5c30"></td>
+          <td id="r5c31"></td>
+          <td id="r5c32"></td>
+          <td id="r5c33"></td>
+          <td id="r5c34"></td>
+          <td id="r5c35"></td>
+        </tr>
+        <tr>
+          <td id="r6c1"></td>
+          <td id="r6c2"></td>
+          <td id="r6c3"></td>
+          <td id="r6c4"></td>
+          <td id="r6c5"></td>
+          <td id="r6c6"></td>
+          <td id="r6c7"></td>
+          <td id="r6c8"></td>
+          <td id="r6c9"></td>
+          <td id="r6c10"></td>
+          <td id="r6c11"></td>
+          <td id="r6c12"></td>
+          <td id="r6c13"></td>
+          <td id="r6c14"></td>
+          <td id="r6c15"></td>
+          <td id="r6c16"></td>
+          <td id="r6c17"></td>
+          <td id="r6c18"></td>
+          <td id="r6c19"></td>
+          <td id="r6c20"></td>
+          <td id="r6c21"></td>
+          <td id="r6c22"></td>
+          <td id="r6c23"></td>
+          <td id="r6c24"></td>
+          <td id="r6c25"></td>
+          <td id="r6c26"></td>
+          <td id="r6c27"></td>
+          <td id="r6c28"></td>
+          <td id="r6c29"></td>
+          <td id="r6c30"></td>
+          <td id="r6c31"></td>
+          <td id="r6c32"></td>
+          <td id="r6c33"></td>
+          <td id="r6c34"></td>
+          <td id="r6c35"></td>
+        </tr>
+        <tr>
+          <td id="r7c1"></td>
+          <td id="r7c2"></td>
+          <td id="r7c3"></td>
+          <td id="r7c4"></td>
+          <td id="r7c5"></td>
+          <td id="r7c6"></td>
+          <td id="r7c7"></td>
+          <td id="r7c8"></td>
+          <td id="r7c9"></td>
+          <td id="r7c10"></td>
+          <td id="r7c11"></td>
+          <td id="r7c12"></td>
+          <td id="r7c13"></td>
+          <td id="r7c14"></td>
+          <td id="r7c15"></td>
+          <td id="r7c16"></td>
+          <td id="r7c17"></td>
+          <td id="r7c18"></td>
+          <td id="r7c19"></td>
+          <td id="r7c20"></td>
+          <td id="r7c21"></td>
+          <td id="r7c22"></td>
+          <td id="r7c23"></td>
+          <td id="r7c24"></td>
+          <td id="r7c25"></td>
+          <td id="r7c26"></td>
+          <td id="r7c27"></td>
+          <td id="r7c28"></td>
+          <td id="r7c29"></td>
+          <td id="r7c30"></td>
+          <td id="r7c31"></td>
+          <td id="r7c32"></td>
+          <td id="r7c33"></td>
+          <td id="r7c34"></td>
+          <td id="r7c35"></td>
+        </tr>
+        <tr>
+          <td id="r8c1"></td>
+          <td id="r8c2"></td>
+          <td id="r8c3"></td>
+          <td id="r8c4"></td>
+          <td id="r8c5"></td>
+          <td id="r8c6"></td>
+          <td id="r8c7"></td>
+          <td id="r8c8"></td>
+          <td id="r8c9"></td>
+          <td id="r8c10"></td>
+          <td id="r8c11"></td>
+          <td id="r8c12"></td>
+          <td id="r8c13"></td>
+          <td id="r8c14"></td>
+          <td id="r8c15"></td>
+          <td id="r8c16"></td>
+          <td id="r8c17"></td>
+          <td id="r8c18"></td>
+          <td id="r8c19"></td>
+          <td id="r8c20"></td>
+          <td id="r8c21"></td>
+          <td id="r8c22"></td>
+          <td id="r8c23"></td>
+          <td id="r8c24"></td>
+          <td id="r8c25"></td>
+          <td id="r8c26"></td>
+          <td id="r8c27"></td>
+          <td id="r8c28"></td>
+          <td id="r8c29"></td>
+          <td id="r8c30"></td>
+          <td id="r8c31"></td>
+          <td id="r8c32"></td>
+          <td id="r8c33"></td>
+          <td id="r8c34"></td>
+          <td id="r8c35"></td>
+        </tr>
+        <tr>
+          <td id="r9c1"></td>
+          <td id="r9c2"></td>
+          <td id="r9c3"></td>
+          <td id="r9c4"></td>
+          <td id="r9c5"></td>
+          <td id="r9c6"></td>
+          <td id="r9c7"></td>
+          <td id="r9c8"></td>
+          <td id="r9c9"></td>
+          <td id="r9c10"></td>
+          <td id="r9c11"></td>
+          <td id="r9c12"></td>
+          <td id="r9c13"></td>
+          <td id="r9c14"></td>
+          <td id="r9c15"></td>
+          <td id="r9c16"></td>
+          <td id="r9c17"></td>
+          <td id="r9c18"></td>
+          <td id="r9c19"></td>
+          <td id="r9c20"></td>
+          <td id="r9c21"></td>
+          <td id="r9c22"></td>
+          <td id="r9c23"></td>
+          <td id="r9c24"></td>
+          <td id="r9c25"></td>
+          <td id="r9c26"></td>
+          <td id="r9c27"></td>
+          <td id="r9c28"></td>
+          <td id="r9c29"></td>
+          <td id="r9c30"></td>
+          <td id="r9c31"></td>
+          <td id="r9c32"></td>
+          <td id="r9c33"></td>
+          <td id="r9c34"></td>
+          <td id="r9c35"></td>
+        </tr>
+        <tr>
+          <td id="r10c1"></td>
+          <td id="r10c2"></td>
+          <td id="r10c3"></td>
+          <td id="r10c4"></td>
+          <td id="r10c5"></td>
+          <td id="r10c6"></td>
+          <td id="r10c7"></td>
+          <td id="r10c8"></td>
+          <td id="r10c9"></td>
+          <td id="r10c10"></td>
+          <td id="r10c11"></td>
+          <td id="r10c12"></td>
+          <td id="r10c13"></td>
+          <td id="r10c14"></td>
+          <td id="r10c15"></td>
+          <td id="r10c16"></td>
+          <td id="r10c17"></td>
+          <td id="r10c18"></td>
+          <td id="r10c19"></td>
+          <td id="r10c20"></td>
+          <td id="r10c21"></td>
+          <td id="r10c22"></td>
+          <td id="r10c23"></td>
+          <td id="r10c24"></td>
+          <td id="r10c25"></td>
+          <td id="r10c26"></td>
+          <td id="r10c27"></td>
+          <td id="r10c28"></td>
+          <td id="r10c29"></td>
+          <td id="r10c30"></td>
+          <td id="r10c31"></td>
+          <td id="r10c32"></td>
+          <td id="r10c33"></td>
+          <td id="r10c34"></td>
+          <td id="r10c35"></td>
+        </tr>
+        <tr>
+          <td id="r11c1"></td>
+          <td id="r11c2"></td>
+          <td id="r11c3"></td>
+          <td id="r11c4"></td>
+          <td id="r11c5"></td>
+          <td id="r11c6"></td>
+          <td id="r11c7"></td>
+          <td id="r11c8"></td>
+          <td id="r11c9"></td>
+          <td id="r11c10"></td>
+          <td id="r11c11"></td>
+          <td id="r11c12"></td>
+          <td id="r11c13"></td>
+          <td id="r11c14"></td>
+          <td id="r11c15"></td>
+          <td id="r11c16"></td>
+          <td id="r11c17"></td>
+          <td id="r11c18"></td>
+          <td id="r11c19"></td>
+          <td id="r11c20"></td>
+          <td id="r11c21"></td>
+          <td id="r11c22"></td>
+          <td id="r11c23"></td>
+          <td id="r11c24"></td>
+          <td id="r11c25"></td>
+          <td id="r11c26"></td>
+          <td id="r11c27"></td>
+          <td id="r11c28"></td>
+          <td id="r11c29"></td>
+          <td id="r11c30"></td>
+          <td id="r11c31"></td>
+          <td id="r11c32"></td>
+          <td id="r11c33"></td>
+          <td id="r11c34"></td>
+          <td id="r11c35"></td>
+        </tr>
+        <tr>
+          <td id="r12c1"></td>
+          <td id="r12c2"></td>
+          <td id="r12c3"></td>
+          <td id="r12c4"></td>
+          <td id="r12c5"></td>
+          <td id="r12c6"></td>
+          <td id="r12c7"></td>
+          <td id="r12c8"></td>
+          <td id="r12c9"></td>
+          <td id="r12c10"></td>
+          <td id="r12c11"></td>
+          <td id="r12c12"></td>
+          <td id="r12c13"></td>
+          <td id="r12c14"></td>
+          <td id="r12c15"></td>
+          <td id="r12c16"></td>
+          <td id="r12c17"></td>
+          <td id="r12c18"></td>
+          <td id="r12c19"></td>
+          <td id="r12c20"></td>
+          <td id="r12c21"></td>
+          <td id="r12c22"></td>
+          <td id="r12c23"></td>
+          <td id="r12c24"></td>
+          <td id="r12c25"></td>
+          <td id="r12c26"></td>
+          <td id="r12c27"></td>
+          <td id="r12c28"></td>
+          <td id="r12c29"></td>
+          <td id="r12c30"></td>
+          <td id="r12c31"></td>
+          <td id="r12c32"></td>
+          <td id="r12c33"></td>
+          <td id="r12c34"></td>
+          <td id="r12c35"></td>
+        </tr>
+        <tr>
+          <td id="r13c1"></td>
+          <td id="r13c2"></td>
+          <td id="r13c3"></td>
+          <td id="r13c4"></td>
+          <td id="r13c5"></td>
+          <td id="r13c6"></td>
+          <td id="r13c7"></td>
+          <td id="r13c8"></td>
+          <td id="r13c9"></td>
+          <td id="r13c10"></td>
+          <td id="r13c11"></td>
+          <td id="r13c12"></td>
+          <td id="r13c13"></td>
+          <td id="r13c14"></td>
+          <td id="r13c15"></td>
+          <td id="r13c16"></td>
+          <td id="r13c17"></td>
+          <td id="r13c18"></td>
+          <td id="r13c19"></td>
+          <td id="r13c20"></td>
+          <td id="r13c21"></td>
+          <td id="r13c22"></td>
+          <td id="r13c23"></td>
+          <td id="r13c24"></td>
+          <td id="r13c25"></td>
+          <td id="r13c26"></td>
+          <td id="r13c27"></td>
+          <td id="r13c28"></td>
+          <td id="r13c29"></td>
+          <td id="r13c30"></td>
+          <td id="r13c31"></td>
+          <td id="r13c32"></td>
+          <td id="r13c33"></td>
+          <td id="r13c34"></td>
+          <td id="r13c35"></td>
+        </tr>
+        <tr>
+          <td id="r14c1"></td>
+          <td id="r14c2"></td>
+          <td id="r14c3"></td>
+          <td id="r14c4"></td>
+          <td id="r14c5"></td>
+          <td id="r14c6"></td>
+          <td id="r14c7"></td>
+          <td id="r14c8"></td>
+          <td id="r14c9"></td>
+          <td id="r14c10"></td>
+          <td id="r14c11"></td>
+          <td id="r14c12"></td>
+          <td id="r14c13"></td>
+          <td id="r14c14"></td>
+          <td id="r14c15"></td>
+          <td id="r14c16"></td>
+          <td id="r14c17"></td>
+          <td id="r14c18"></td>
+          <td id="r14c19"></td>
+          <td id="r14c20"></td>
+          <td id="r14c21"></td>
+          <td id="r14c22"></td>
+          <td id="r14c23"></td>
+          <td id="r14c24"></td>
+          <td id="r14c25"></td>
+          <td id="r14c26"></td>
+          <td id="r14c27"></td>
+          <td id="r14c28"></td>
+          <td id="r14c29"></td>
+          <td id="r14c30"></td>
+          <td id="r14c31"></td>
+          <td id="r14c32"></td>
+          <td id="r14c33"></td>
+          <td id="r14c34"></td>
+          <td id="r14c35"></td>
+        </tr>
+        <tr>
+          <td id="r15c1"></td>
+          <td id="r15c2"></td>
+          <td id="r15c3"></td>
+          <td id="r15c4"></td>
+          <td id="r15c5"></td>
+          <td id="r15c6"></td>
+          <td id="r15c7"></td>
+          <td id="r15c8"></td>
+          <td id="r15c9"></td>
+          <td id="r15c10"></td>
+          <td id="r15c11"></td>
+          <td id="r15c12"></td>
+          <td id="r15c13"></td>
+          <td id="r15c14"></td>
+          <td id="r15c15"></td>
+          <td id="r15c16"></td>
+          <td id="r15c17"></td>
+          <td id="r15c18"></td>
+          <td id="r15c19"></td>
+          <td id="r15c20"></td>
+          <td id="r15c21"></td>
+          <td id="r15c22"></td>
+          <td id="r15c23"></td>
+          <td id="r15c24"></td>
+          <td id="r15c25"></td>
+          <td id="r15c26"></td>
+          <td id="r15c27"></td>
+          <td id="r15c28"></td>
+          <td id="r15c29"></td>
+          <td id="r15c30"></td>
+          <td id="r15c31"></td>
+          <td id="r15c32"></td>
+          <td id="r15c33"></td>
+          <td id="r15c34"></td>
+          <td id="r15c35"></td>
+        </tr>
+        <tr>
+          <td id="r16c1"></td>
+          <td id="r16c2"></td>
+          <td id="r16c3"></td>
+          <td id="r16c4"></td>
+          <td id="r16c5"></td>
+          <td id="r16c6"></td>
+          <td id="r16c7"></td>
+          <td id="r16c8"></td>
+          <td id="r16c9"></td>
+          <td id="r16c10"></td>
+          <td id="r16c11"></td>
+          <td id="r16c12"></td>
+          <td id="r16c13"></td>
+          <td id="r16c14"></td>
+          <td id="r16c15"></td>
+          <td id="r16c16"></td>
+          <td id="r16c17"></td>
+          <td id="r16c18"></td>
+          <td id="r16c19"></td>
+          <td id="r16c20"></td>
+          <td id="r16c21"></td>
+          <td id="r16c22"></td>
+          <td id="r16c23"></td>
+          <td id="r16c24"></td>
+          <td id="r16c25"></td>
+          <td id="r16c26"></td>
+          <td id="r16c27"></td>
+          <td id="r16c28"></td>
+          <td id="r16c29"></td>
+          <td id="r16c30"></td>
+          <td id="r16c31"></td>
+          <td id="r16c32"></td>
+          <td id="r16c33"></td>
+          <td id="r16c34"></td>
+          <td id="r16c35"></td>
+        </tr>
+        <tr>
+          <td id="r17c1"></td>
+          <td id="r17c2"></td>
+          <td id="r17c3"></td>
+          <td id="r17c4"></td>
+          <td id="r17c5"></td>
+          <td id="r17c6"></td>
+          <td id="r17c7"></td>
+          <td id="r17c8"></td>
+          <td id="r17c9"></td>
+          <td id="r17c10"></td>
+          <td id="r17c11"></td>
+          <td id="r17c12"></td>
+          <td id="r17c13"></td>
+          <td id="r17c14"></td>
+          <td id="r17c15"></td>
+          <td id="r17c16"></td>
+          <td id="r17c17"></td>
+          <td id="r17c18"></td>
+          <td id="r17c19"></td>
+          <td id="r17c20"></td>
+          <td id="r17c21"></td>
+          <td id="r17c22"></td>
+          <td id="r17c23"></td>
+          <td id="r17c24"></td>
+          <td id="r17c25"></td>
+          <td id="r17c26"></td>
+          <td id="r17c27"></td>
+          <td id="r17c28"></td>
+          <td id="r17c29"></td>
+          <td id="r17c30"></td>
+          <td id="r17c31"></td>
+          <td id="r17c32"></td>
+          <td id="r17c33"></td>
+          <td id="r17c34"></td>
+          <td id="r17c35"></td>
+        </tr>
+        <tr>
+          <td id="r18c1"></td>
+          <td id="r18c2"></td>
+          <td id="r18c3"></td>
+          <td id="r18c4"></td>
+          <td id="r18c5"></td>
+          <td id="r18c6"></td>
+          <td id="r18c7"></td>
+          <td id="r18c8"></td>
+          <td id="r18c9"></td>
+          <td id="r18c10"></td>
+          <td id="r18c11"></td>
+          <td id="r18c12"></td>
+          <td id="r18c13"></td>
+          <td id="r18c14"></td>
+          <td id="r18c15"></td>
+          <td id="r18c16"></td>
+          <td id="r18c17"></td>
+          <td id="r18c18"></td>
+          <td id="r18c19"></td>
+          <td id="r18c20"></td>
+          <td id="r18c21"></td>
+          <td id="r18c22"></td>
+          <td id="r18c23"></td>
+          <td id="r18c24"></td>
+          <td id="r18c25"></td>
+          <td id="r18c26"></td>
+          <td id="r18c27"></td>
+          <td id="r18c28"></td>
+          <td id="r18c29"></td>
+          <td id="r18c30"></td>
+          <td id="r18c31"></td>
+          <td id="r18c32"></td>
+          <td id="r18c33"></td>
+          <td id="r18c34"></td>
+          <td id="r18c35"></td>
+        </tr>
+        <tr>
+          <td id="r19c1"></td>
+          <td id="r19c2"></td>
+          <td id="r19c3"></td>
+          <td id="r19c4"></td>
+          <td id="r19c5"></td>
+          <td id="r19c6"></td>
+          <td id="r19c7"></td>
+          <td id="r19c8"></td>
+          <td id="r19c9"></td>
+          <td id="r19c10"></td>
+          <td id="r19c11"></td>
+          <td id="r19c12"></td>
+          <td id="r19c13"></td>
+          <td id="r19c14"></td>
+          <td id="r19c15"></td>
+          <td id="r19c16"></td>
+          <td id="r19c17"></td>
+          <td id="r19c18"></td>
+          <td id="r19c19"></td>
+          <td id="r19c20"></td>
+          <td id="r19c21"></td>
+          <td id="r19c22"></td>
+          <td id="r19c23"></td>
+          <td id="r19c24"></td>
+          <td id="r19c25"></td>
+          <td id="r19c26"></td>
+          <td id="r19c27"></td>
+          <td id="r19c28"></td>
+          <td id="r19c29"></td>
+          <td id="r19c30"></td>
+          <td id="r19c31"></td>
+          <td id="r19c32"></td>
+          <td id="r19c33"></td>
+          <td id="r19c34"></td>
+          <td id="r19c35"></td>
+        </tr>
+        <tr>
+          <td id="r20c1"></td>
+          <td id="r20c2"></td>
+          <td id="r20c3"></td>
+          <td id="r20c4"></td>
+          <td id="r20c5"></td>
+          <td id="r20c6"></td>
+          <td id="r20c7"></td>
+          <td id="r20c8"></td>
+          <td id="r20c9"></td>
+          <td id="r20c10"></td>
+          <td id="r20c11"></td>
+          <td id="r20c12"></td>
+          <td id="r20c13"></td>
+          <td id="r20c14"></td>
+          <td id="r20c15"></td>
+          <td id="r20c16"></td>
+          <td id="r20c17"></td>
+          <td id="r20c18"></td>
+          <td id="r20c19"></td>
+          <td id="r20c20"></td>
+          <td id="r20c21"></td>
+          <td id="r20c22"></td>
+          <td id="r20c23"></td>
+          <td id="r20c24"></td>
+          <td id="r20c25"></td>
+          <td id="r20c26"></td>
+          <td id="r20c27"></td>
+          <td id="r20c28"></td>
+          <td id="r20c29"></td>
+          <td id="r20c30"></td>
+          <td id="r20c31"></td>
+          <td id="r20c32"></td>
+          <td id="r20c33"></td>
+          <td id="r20c34"></td>
+          <td id="r20c35"></td>
+        </tr>
+      </table>
+
+      <div class="menu">
+        <center>
+          <a class="menu" href="SnakeEasy.html">Single Player</a>
+          <a class="menu" href="SnakeMultiplayer.html">Multiplayer</a>
+          <a class="menu" href="SnakeChallenge.html">Challenge</a>
+        </center>
+      </div>
+    </div>
+  </body>
 </html>

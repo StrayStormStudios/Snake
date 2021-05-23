@@ -4,30 +4,27 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
       $(document).ready(function () {
-        //grid variables
+        //game variables
         var width = 35; //25 squares wide
         var height = 20; //15 squares tall
-        var gameStarted = false; //Tells if game is started
-        var gameOver = false; //True when the game is over]
-        var p1GameOver = false; //player 1 game over
-        var p2GameOver = false; //player 2 game over
-        var score = 0; //P1 current score
-        var score2 = 0; //P2 current score
+        var gameStarted = false; //Tells whether game is started
+        var gameOver = false; //True when the game is over
+        var score = 0; //current score
 
-        //snake variables (snake 1)
+        //snake variables
         var snakeHeadColor = "#ff0000"; //red
         var snakeBodyColor = "#FF8000"; //orange
-        var snakeX = new Array(); //snake's x Position
-        snakeX[0] = 18; //head
-        snakeX[1] = 17; //first tail
-        var snakeY = new Array(); //snake's y Position
+        var snakeX = new Array(); //snakes x position
+        snakeX[0] = 10; //head
+        snakeX[1] = 9; //first tail
+        var snakeY = new Array(); //snakes y position
         snakeY[0] = 10; //head
-        snakeY[1] = 10; //first tail
-        var velX = 1; //X direction (right)
-        var velY = 0; //Y direction (snake is moving right)
+        snakeY[1] = 10; //fist tail
+        var velX = 1; //X direction(right)
         var lastVelX = 1;
         var lastVelY = 0;
-        var size = 1; //snake size
+        var velY = 0; //Y direction (Snake is moving right)
+        var size = 1; //snake size tail section
 
         //draw the snake
         $("#r" + snakeY[1] + "c" + snakeX[1]).css({
@@ -37,67 +34,39 @@
           "background-color": snakeHeadColor,
         });
 
-        //snake variables (snake 2)
-        var snake2HeadColor = "#00ffff"; //cyan
-        var snake2BodyColor = "#0000ff"; //blue
-        var snake2X = new Array(); //snake 2 x position
-        snake2X[0] = 17; //head
-        snake2X[1] = 18; //first tail
-        var snake2Y = new Array(); //snake2 y position
-        snake2Y[0] = 12; //head
-        snake2Y[1] = 12; //first head
-        var vel2X = -1; //x direction (left)
-        var vel2Y = 0; //y direction snake 20
-        var lastVel2X = 1;
-        var lastVelY = 0;
-        var size2 = 1; //snake 2 size
-
         //timer variables
         var timerInterval = 100; //100 ms per frame
         var timer = setInterval(mainLoop, timerInterval);
 
-        //draw snake 20$("#r" + snakeY[1] + "c" + snakeX[1]).css({"background-color":snakeBodyColor});
-        $("#r" + snake2Y[1] + "c" + snake2X[1]).css({
-          "background-color": snake2BodyColor,
-        });
-        $("#r" + snake2Y[0] + "c" + snake2X[0]).css({
-          "background-color": snake2HeadColor,
-        });
-
         //food variables
         var foodX = new Array();
         var foodY = new Array();
-        var foodColor = "#00ff00";
+        var foodColor = "#7D3C98";
         var numFood = 3;
         for (var i = 0; i < numFood; i++) {
           createFood(i);
         }
 
+        //mine variables
+        var mineX = new Array();
+        var mineY = new Array();
+        var numMines = 0;
+        var mineColor = "#000000";
+
         //mainLoop --> Main game loop
         function mainLoop() {
           if (gameStarted) {
-            //play game if the game has started
-            //move the snake
-            if (!p1GameOver) {
-              moveSnake();
-            }
-            if (!p2GameOver) {
-              moveSnake2();
-            }
-            //check for collision
+            //play game if game has started
+            //moves the snake
+            moveSnake();
+            //check if snake collides with self
             snakeCollision();
-
-            //check game over state
-            if (p2GameOver && p1GameOver) {
-              gameOver = true;
-              gameStarted = false;
-            }
-            //show game over screen
-            if (gameOver) {
-              $("#gameOver").css({ visibility: "visible" });
-            }
             //check if snake ate food
             checkFood();
+            //draw mines -- redraw all mines
+            drawMines();
+            //draw food --redraw all food
+            drawFood();
           }
         }
 
@@ -115,166 +84,96 @@
               "background-color": snakeBodyColor,
             });
           }
-          //move the snake head
+          //move snake head
           snakeX[0] += velX;
-          snakeY[0] += velY;
           lastVelX = velX;
           lastVelY = velY;
-          //draw snake's head
+          snakeY[0] += velY;
+          //draw snakes head
           $("#r" + snakeY[0] + "c" + snakeX[0]).css({
             "background-color": snakeHeadColor,
-          });
-        }
-
-        //moveSnake --> moves the Snake2
-        function moveSnake2() {
-          //erase the tail
-          $("#r" + snake2Y[size2] + "c" + snake2X[size2]).css({
-            "background-color": "#dddddd",
-          });
-          //move the body after the previous section
-          for (var i = size2; i > 0; i--) {
-            snake2X[i] = snake2X[i - 1];
-            snake2Y[i] = snake2Y[i - 1];
-            $("#r" + snake2Y[i] + "c" + snake2X[i]).css({
-              "background-color": snake2BodyColor,
-            });
-          }
-          //move the snake head
-          snake2X[0] += vel2X;
-          snake2Y[0] += vel2Y;
-          lastVel2X = vel2X;
-          lastVel2Y = vel2Y;
-          //draw snake's head
-          $("#r" + snake2Y[0] + "c" + snake2X[0]).css({
-            "background-color": snake2HeadColor,
           });
         }
 
         function snakeCollision() {
           //check for collision with self
           for (var i = 1; i <= size; i++) {
-            //if the head has hit the current body... game over
-            if (
-              snakeX[0] == snakeX[i] /*P1head X to p1body X*/ &&
-              snakeY[0] == snakeY[i] /*p1head Y to p1body Y*/
-            ) {
-              p1GameOver = true; //player 1 into self
+            //if the head hit the body... game over man
+            if (snakeX[0] == snakeX[i] && snakeY[0] == snakeY[i]) {
+              gameOver = true;
+              gameStarted = false;
             }
-            //if other snake has a hit our body gameOver
-            if (
-              snake2X[0] == snakeX[i] /*p2head X to p1body X*/ &&
-              snake2Y[0] == snakeY[i] /*p2head Y to p1body Y*/
-            ) {
-              p2GameOver = ture; //player 2 into player 1 body
+          }
+          //check collision with mines
+          for (var i = 0; i < numMines; i++) {
+            if (snakeX[0] == mineX[i] && snakeY[0] == mineY[i]) {
+              gameOver = true;
+              gameStarted = false;
+              $("#r" + snakeY[0] + "c" + snakeX[0]).css({
+                "background-color": mineColor,
+              });
             }
           }
           //check collision with wall
           //check collision with right wall
           if (snakeX[0] > width) {
-            p1GameOver = true;
+            gameOver = true;
+            gameStarted = false;
           }
           //left wall
           if (snakeX[0] <= 0) {
-            p1GameOver = true;
+            gameOver = true;
+            gameStarted = false;
           }
           //bottom wall
           if (snakeY[0] > height) {
-            p1GameOver = true;
+            gameOver = true;
+            gameStarted = false;
           }
           //top wall
           if (snakeY[0] <= 0) {
-            p1GameOver = true;
+            gameOver = true;
+            gameStarted = false;
           }
-          //check for collision with self (snake2)
-          for (var i = 1; i <= size2; i++) {
-            //if the head has hit the current body... game over
-            if (
-              snake2X[0] == snake2X[i] /*p2head X to p2body X*/ &&
-              snake2Y[0] == snake2Y[i] /*p2head Y to p2body Y*/
-            ) {
-              p2GameOver = true; //player 2 into self
-            }
-            //if the other snake has hit us... game over
-            if (
-              snakeX[0] == snake2X[i] /*p1head X to p2head X*/ &&
-              snakeY[0] == snake2Y[i] /*p1head Y to p2body Y*/
-            ) {
-              p1gameOver = true; //player 1 into player 2 body
-            }
-          }
-          //check collision with wall
-          //check collision with right wall
-          if (snake2X[0] > width) {
-            p2GameOver = true;
-          }
-          //left wall
-          if (snake2X[0] <= 0) {
-            p2GameOver = true;
-          }
-          //bottom wall
-          if (snake2Y[0] > height) {
-            p2GameOver = true;
-          }
-          //top wall
-          if (snake2Y[0] <= 0) {
-            p2GameOver = true;
-          }
-
-          //check if two snake heads have collided
-          if (
-            snake2X[0] == snakeX[0] /*p2head X to p1head X*/ &&
-            snake2Y[0] == SnakeY[0] /*p2head Y to p1head Y*/
-          ) {
-            p1GameOver = true;
-            p2GameOver = true; //players hit heads
-          }
-
           //show game over screen
           if (gameOver) {
             $("#gameOver").css({ visibility: "visible" });
           }
         }
 
-        //checkFood() --> checks if the snake has hit food... if so, increase snake size
+        //check food() --> checks if the snake has hit the food... if so.. increase the snake size and
         //spawn new food
         function checkFood() {
-          //did the snake eat the food?
+          //did the snake est the food
           for (var i = 0; i < numFood; i++) {
             if (snakeX[0] == foodX[i] && snakeY[0] == foodY[i]) {
-              size = size + 2; //add 2 to snakes size
-              createFood(i); //creates a new food
+              size = size + 3; //add three to snakes size
+              createFood(i); //create a new food
+              createMine(); //create a mine
               //increase the score
               score = score + size;
-              $("#score").html("P1 Score: " + score);
-            }
-            if (snake2X[0] == foodX[i] && snake2Y[0] == foodY[i]) {
-              size2 = size2 + 2; //add 2 to snakes size
-              createFood(i); //creates a new food
-              //increase the score
-              score2 = score2 + size2;
-              $("#score2").html("P2 Score: " + score2);
+              $("#score").html("Score: " + score);
             }
           }
         }
 
-        //createFood() --> Randomly places the food on the screen in a way that will not
-        //     be placed on the snake
+        //createFood() --> randomly places food on the screen in a way that will not
+        //	be placed on snake
         function createFood(n) {
-          var validFood = false; //keeps track of if we have created a valid placed food
-          //keep trying until we have a valid food
+          var validFood = false; // keeps track of if we have a created a validly placed food
+          //keeps trying until we have a valid food
           while (!validFood) {
             //set random values for food
             foodX[n] = Math.floor(Math.random() * width) + 1;
             foodY[n] = Math.floor(Math.random() * height) + 1;
 
-            //assume the food is placed in a good place
+            //assume the food is placed in a good placed
             validFood = true;
             //check if the food collides with the snake
             for (var i = 0; i < size; i++) {
               if (foodX[n] == snakeX[i] && foodY[n] == snakeY[i]) {
                 validFood = false;
-              } //end if
+              } //ends if
             } //end for loop
             //check if food collides with other food
             for (var i = 0; i < numFood; i++) {
@@ -282,12 +181,84 @@
                 validFood = false;
               } //end if
             } //end for loop
+            //check if food collides with a mine
+            for (var i = 0; i < numMines; i++) {
+              if (foodX[n] == mineX[i] && foodY[n] == mineY[i]) {
+                validFood = false;
+              } //end if
+            } //end for
           } //end while loop
           //draw the food
           $("#r" + foodY[n] + "c" + foodX[n]).css({
             "background-color": foodColor,
           });
-        } //ends the function
+        } //end the function
+
+        //create mine --> creates a mine and spawns it
+        function createMine() {
+          var validMine = false;
+
+          while (!validMine) {
+            validMine = true; //assume we will pick a good spot
+            //set the random values for mine
+            mineX[numMines] = Math.floor(Math.random() * width) + 1;
+            mineY[numMines] = Math.floor(Math.random() * height) + 1;
+
+            //make sure the mine does not spawn on snake
+            for (var i = 0; i <= size; i++) {
+              if (
+                mineX[numMines] == snakeX[i] &&
+                mineY[numMines] == snakeY[i]
+              ) {
+                validMine = false;
+              } //end if
+            } //end for
+            //make sure the mine does not spawn on food
+            for (var i = 0; i < numFood; i++) {
+              if (mineX[numMines] == foodX[i] && mineY[numMines] == foodY[i]) {
+                validMine = false;
+              }
+            }
+            //make sure mine does not spawn on another mine
+            for (var i = 0; i < numMines; i++) {
+              if (mineX[numMines] == mineX[i] && mineY[numMines] == mineY[i]) {
+                validMine = false;
+              }
+            }
+
+            //make sure the mine does not spawn in front of current snake trajectory (5 spaces)
+            for (var i = 1; i <= 5; i++) {
+              if (
+                mineX[numMines] == snakeX[0] + i * velX &&
+                mineY[numMines] == snakeY[0] + i * velY
+              ) {
+                validMine = false;
+              }
+            }
+
+            numMines++;
+          } //end while
+          //draw the mine
+          $("#r" + mineY[numMines - 1] + "c" + mineX[numMines - 1]).css({
+            "background-color": mineColor,
+          });
+        }
+        //redraw Mines
+        function drawMines() {
+          for (var i = 0; i < numMines; i++) {
+            $("#r" + mineY[i] + "c" + mineX[i]).css({
+              "background-color": mineColor,
+            });
+          }
+        }
+        //redraw Food
+        function drawFood() {
+          for (var i = 0; i < numFood; i++) {
+            $("#r" + foodY[i] + "c" + foodX[i]).css({
+              "background-color": foodColor,
+            });
+          }
+        }
 
         //keyDown function (handles key presses)
         $("body").keydown(function (event) {
@@ -316,35 +287,26 @@
               velX = 0;
               velY = -1;
             }
-            //player 2 right (d)
-            if (event.keyCode == 68 && lastVel2X == 0) {
-              vel2X = 1;
-              vel2Y = 0;
-            }
-            //player 2 left (a)
-            if (event.keyCode == 65 && lastVel2X == 0) {
-              vel2X = -1;
-              vel2Y = 0;
-            }
-            //player 2 down (s)
-            if (event.keyCode == 83 && lastVel2Y == 0) {
-              vel2X = 0;
-              vel2Y = 1;
-            }
-            //player 2 up (w)
-            if (event.keyCode == 87 && lastVel2Y == 0) {
-              vel2X = 0;
-              vel2Y = -1;
-            }
             //pausing game
             if (event.keyCode == 32 && !gameOver) {
               gameStarted = false;
               $("#clickAnyKey").css({ visibility: "visible" });
             }
           }
+          /*//reset game when user presses the r key
+			if(event.keyCode==82){
+				location.reload();
+			}
+		*/
+        });
+
+        //reload game
+        $("#reload").click(function () {
+          location.reload();
         });
       });
     </script>
+
     <style>
       body {
         background-image: url("http://undergroundsa.net/images/home-fulllength-background.jpg");
@@ -382,22 +344,6 @@
         font-family: Impact, Charcoal, sans-serif;
         color: #e80000;
         float: right;
-        text-shadow: 3px 3px 5px #000000;
-        background-color: #444444;
-        padding: 5px;
-        border-radius: 10px;
-        box-shadow: 3px 3px 5px #000000;
-        width: 120px;
-        position: relative;
-        top: 55px;
-        text-align: center;
-      }
-
-      #score2 {
-        font-size: 15pt;
-        font-family: Impact, Charcoal, sans-serif;
-        color: #8888ff;
-        float: left;
         text-shadow: 3px 3px 5px #000000;
         background-color: #444444;
         padding: 5px;
@@ -489,8 +435,7 @@
 
     <div id="background">
       <div class="header">
-        <span id="score2">P2 Score: 0</span>
-        <span id="score">P1 Score: 0</span>
+        <span id="score">Score: 0</span>
 
         <h1 class="header">Snake</h1>
       </div>

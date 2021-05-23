@@ -39,10 +39,13 @@
         var timer = setInterval(mainLoop, timerInterval);
 
         //food variables
-        var foodX = 0;
-        var foodY = 0;
+        var foodX = new Array();
+        var foodY = new Array();
         var foodColor = "#7D3C98";
-        createFood();
+        var numFood = 3;
+        for (var i = 0; i < numFood; i++) {
+          createFood(i);
+        }
 
         //mainLoop --> Main game loop
         function mainLoop() {
@@ -122,36 +125,46 @@
         //spawn new food
         function checkFood() {
           //did the snake est the food
-          if (snakeX[0] == foodX && snakeY[0] == foodY) {
-            size = size + 3; //add three to snakes size
-            createFood(); //create a new food
-            //increase the score
-            score = score + size;
-            $("#score").html("Score: " + score);
+          for (var i = 0; i < numFood; i++) {
+            if (snakeX[0] == foodX[i] && snakeY[0] == foodY[i]) {
+              size = size + 3; //add three to snakes size
+              createFood(i); //create a new food
+              //increase the score
+              score = score + size;
+              $("#score").html("Score: " + score);
+            }
           }
         }
 
         //createFood() --> randomly places food on the screen in a way that will not
         //	be placed on snake
-        function createFood() {
+        function createFood(n) {
           var validFood = false; // keeps track of if we have a created a validly placed food
           //keeps trying until we have a valid food
           while (!validFood) {
             //set random values for food
-            foodX = Math.floor(Math.random() * width) + 1;
-            foodY = Math.floor(Math.random() * height) + 1;
+            foodX[n] = Math.floor(Math.random() * width) + 1;
+            foodY[n] = Math.floor(Math.random() * height) + 1;
 
             //assume the food is placed in a good placed
             validFood = true;
             //check if the food collides with the snake
             for (var i = 0; i < size; i++) {
-              if (foodX == snakeX[i] && foodY == snakeY[i]) {
+              if (foodX[n] == snakeX[i] && foodY[n] == snakeY[i]) {
                 validFood = false;
               } //ends if
             } //end for loop
+            //check if food collides with other food
+            for (var i = 0; i < numFood; i++) {
+              if (n != i && foodX[i] == foodX[n] && foodY[i] == foodY[n]) {
+                validFood = false;
+              } //end if
+            } //end for loop
           } //end while loop
           //draw the food
-          $("#r" + foodY + "c" + foodX).css({ "background-color": foodColor });
+          $("#r" + foodY[n] + "c" + foodX[n]).css({
+            "background-color": foodColor,
+          });
         } //end the function
 
         //keyDown function (handles key presses)
@@ -187,6 +200,16 @@
               $("#clickAnyKey").css({ visibility: "visible" });
             }
           }
+          /*//reset game when user presses the r key
+			if(event.keyCode==82){
+				location.reload();
+			}
+		*/
+        });
+
+        //reload game
+        $("#reload").click(function () {
+          location.reload();
         });
       });
     </script>
@@ -203,7 +226,7 @@
       td {
         //border:black 1px solid;
         background-color: #dddddd;
-        width: 13px;
+        width: 14px;
         height: 15px;
         border-radius: 4px;
         box-shadow: 1px 1px 1px #000000;
@@ -213,7 +236,7 @@
         background-color: #0b0b61;
       }
       #background {
-        padding-left: 50px;
+        padding-left: 25px;
         padding-bottom: 50px;
         padding-top: 0px;
         width: 660px;
@@ -263,6 +286,24 @@
         font-family: Impact, Charcoal, sans-serif;
         color: #e80000;
         text-shadow: 5px 5px 10px #000000;
+      }
+
+      #reload {
+        font-size: 20pt;
+        background-color: black;
+        color: white;
+        border: solid 5px white;
+        border-radius: 15px;
+        position: absolute;
+        left: 750px;
+        top: 580px;
+        text-align: center;
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+      #reload:hover {
+        color: black;
+        background-color: gray;
       }
     </style>
 
@@ -1015,6 +1056,7 @@
               <td id="r20c35"></td>
             </tr>
           </table>
+          <a id="reload">Reload</a>
         </div>
       </body>
     </html>

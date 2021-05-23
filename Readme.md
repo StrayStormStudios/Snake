@@ -2,6 +2,8 @@
 
 ## Versions & Change Log
 
+### Version 8: Add Challenge Mode
+
 ### Version 7: Add Game Options
 
 1. Add a reset button

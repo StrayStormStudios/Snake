@@ -2,7 +2,15 @@
 
 ## Versions & Change Log
 
-### Version 3:
+### Version 4: Add Point System
+
+1. Add a score display
+2. Add a score variable
+3. Add score when snake eats food
+4. Increase Score variables when update food
+5. Display new score
+
+### Version 3: Basic Game Restraints
 
 1. Change game to start when key pressed
 2. Add Game Started State

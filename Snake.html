@@ -9,6 +9,7 @@
         var height = 15; //15 squares tall
         var gameStarted = false; //Tells whether game is started
         var gameOver = false; //True when the game is over
+        var score = 0; //current score
 
         //snake variables
         var snakeHeadColor = "#ff0000"; //red
@@ -116,13 +117,17 @@
             $("#gameOver").css({ visibility: "visible" });
           }
         }
+
         //check food() --> checks if the snake has hit the food... if so.. increase the snake size and
         //spawn new food
         function checkFood() {
           //did the snake est the food
           if (snakeX[0] == foodX && snakeY[0] == foodY) {
-            size = size + 2; //add three to snakes size
+            size = size + 3; //add three to snakes size
             createFood(); //create a new food
+            //increase the score
+            score = score + size;
+            $("#score").html("Score: " + score);
           }
         }
 
@@ -244,11 +249,22 @@
         text-shadow: 5px 5px 10px #000000;
         visibility: hidden;
       }
+
+      #score {
+        font-size: 20pt;
+        position: absolute;
+        left: 1000px;
+        top: 100px;
+        font-family: Impact, Charcoal, sans-serif;
+        color: #e80000;
+        text-shadow: 5px 5px 10px #000000;
+      }
     </style>
   </head>
   <body>
     <h1 id="clickAnyKey">Press Any Key to Start</h1>
     <h1 id="gameOver">Game Over!</h1>
+    <h1 id="score">Score: 0</h1>
     <div id="background">
       <h1 class="header">Snake</h1>
       <table>

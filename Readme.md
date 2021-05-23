@@ -2,6 +2,8 @@
 
 ## Versions & Change Log
 
+### Version 6: Add a bigger Grid (35 vs 20 instead of 25 vs 15)
+
 ### Version 5: Add a pause Option when the user hit Space
 
 ### Version 4: Add Point System

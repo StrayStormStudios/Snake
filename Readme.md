@@ -2,6 +2,12 @@
 
 ## Versions & Change Log
 
+### Version 7: Add Game Options
+
+1. Add a reset button
+2. Add optipons to have multiple food
+3. Add a placeholder master game selection screen
+
 ### Version 6: Add a bigger Grid (35 vs 20 instead of 25 vs 15)
 
 ### Version 5: Add a pause Option when the user hit Space

@@ -6,7 +6,9 @@
       $(document).ready(function () {
         //grid variables
         var width = 25; //25 squares wide
-        var hight = 15; //15 squares tall
+        var height = 15; //15 squares tall
+        var gameStarted = false; //Tells whether game is started
+        var gameOver = false; //True when the game is over
 
         //snake variables
         var snakeHeadColor = "#ff0000"; //red
@@ -23,6 +25,14 @@
         var velY = 0; //Y direction (Snake is moving right)
         var size = 1; //snake size tail section
 
+        //draw the snake
+        $("#r" + snakeY[1] + "c" + snakeX[1]).css({
+          "background-color": snakeBodyColor,
+        });
+        $("#r" + snakeY[0] + "c" + snakeX[0]).css({
+          "background-color": snakeHeadColor,
+        });
+
         //timer variables
         var timerInterval = 100; //100 ms per frame
         var timer = setInterval(mainLoop, timerInterval);
@@ -35,10 +45,15 @@
 
         //mainLoop --> Main game loop
         function mainLoop() {
-          //moves the snake
-          moveSnake();
-          //check if snake ate food
-          checkFood();
+          if (gameStarted) {
+            //play game if game has started
+            //moves the snake
+            moveSnake();
+            //check if snake collides with self
+            snakeCollision();
+            //check if snake ate food
+            checkFood();
+          }
         }
 
         //moveSnake --> moves the Snake
@@ -51,7 +66,7 @@
           for (var i = size; i > 0; i--) {
             snakeX[i] = snakeX[i - 1];
             snakeY[i] = snakeY[i - 1];
-            $("#r" + snakeY[size] + "c" + snakeX[size]).css({
+            $("#r" + snakeY[i] + "c" + snakeX[i]).css({
               "background-color": snakeBodyColor,
             });
           }
@@ -66,12 +81,47 @@
           });
         }
 
+        function snakeCollision() {
+          //check for collision with self
+          for (var i = 1; i <= size; i++) {
+            //if the head hit the body... game over man
+            if (snakeX[0] == snakeX[i] && snakeY[0] == snakeY[i]) {
+              gameOver = true;
+              gameStarted = false;
+            }
+          }
+          //check collision with wall
+          //check collision with right wall
+          if (snakeX[0] > width) {
+            gameOver = true;
+            gameStarted = false;
+          }
+          //left wall
+          if (snakeX[0] <= 0) {
+            gameOver = true;
+            gameStarted = false;
+          }
+          //bottom wall
+          if (snakeY[0] > height) {
+            gameOver = true;
+            gameStarted = false;
+          }
+          //top wall
+          if (snakeY[0] <= 0) {
+            gameOver = true;
+            gameStarted = false;
+          }
+          //show game over screen
+          if (gameOver) {
+            $("#gameOver").css({ visibility: "visible" });
+          }
+        }
         //check food() --> checks if the snake has hit the food... if so.. increase the snake size and
         //spawn new food
         function checkFood() {
           //did the snake est the food
           if (snakeX[0] == foodX && snakeY[0] == foodY) {
-            size = size + 3; //add three to snakes size
+            size = size + 2; //add three to snakes size
             createFood(); //create a new food
           }
         }
@@ -84,7 +134,7 @@
           while (!validFood) {
             //set random values for food
             foodX = Math.floor(Math.random() * width) + 1;
-            foodY = Math.floor(Math.random() * hight) + 1;
+            foodY = Math.floor(Math.random() * height) + 1;
 
             //assume the food is placed in a good placed
             validFood = true;
@@ -101,25 +151,31 @@
 
         //keyDown function (handles key presses)
         $("body").keydown(function (event) {
-          //right  (x velocity 1, y velocity 0) must be moving up and down
-          if (event.keyCode == 39 && lastVelX == 0) {
-            velX = 1;
-            velY = 0;
-          }
-          //left
-          if (event.keyCode == 37 && lastVelX == 0) {
-            velX = -1;
-            velY = 0;
-          }
-          //down
-          if (event.keyCode == 40 && lastVelY == 0) {
-            velX = 0;
-            velY = 1;
-          }
-          //up
-          if (event.keyCode == 38 && lastVelY == 0) {
-            velX = 0;
-            velY = -1;
+          //any key will start the game
+          if (!gameStarted && !gameOver) {
+            gameStarted = true;
+            $("#clickAnyKey").css({ visibility: "hidden" });
+          } else {
+            //right  (x velocity 1, y velocity 0) must be moving up and down
+            if (event.keyCode == 39 && lastVelX == 0) {
+              velX = 1;
+              velY = 0;
+            }
+            //left
+            if (event.keyCode == 37 && lastVelX == 0) {
+              velX = -1;
+              velY = 0;
+            }
+            //down
+            if (event.keyCode == 40 && lastVelY == 0) {
+              velX = 0;
+              velY = 1;
+            }
+            //up
+            if (event.keyCode == 38 && lastVelY == 0) {
+              velX = 0;
+              velY = -1;
+            }
           }
         });
       });
@@ -167,9 +223,32 @@
         color: #00ff00;
         text-shadow: 5px 5px 20px #b45f04;
       }
+
+      #clickAnyKey {
+        font-size: 40px;
+        position: absolute;
+        left: 650px;
+        top: 250px;
+        font-family: Impact, Charcoal, sans-serif;
+        color: #46d636;
+        text-shadow: 5px 5px 10px #000000;
+      }
+
+      #gameOver {
+        font-size: 60pt;
+        position: absolute;
+        left: 600px;
+        top: 250px;
+        font-family: Impact, Charcoal, sans-serif;
+        color: #e80000;
+        text-shadow: 5px 5px 10px #000000;
+        visibility: hidden;
+      }
     </style>
   </head>
   <body>
+    <h1 id="clickAnyKey">Press Any Key to Start</h1>
+    <h1 id="gameOver">Game Over!</h1>
     <div id="background">
       <h1 class="header">Snake</h1>
       <table>

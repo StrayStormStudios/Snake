@@ -2,6 +2,8 @@
 
 ## Versions & Change Log
 
+### Version 5: Add a pause Option when the user hit Space
+
 ### Version 4: Add Point System
 
 1. Add a score display

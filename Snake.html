@@ -4,7 +4,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
       $(document).ready(function () {
-        //grid variables
+        //game variables
         var width = 25; //25 squares wide
         var height = 15; //15 squares tall
         var gameStarted = false; //Tells whether game is started
@@ -181,6 +181,11 @@
               velX = 0;
               velY = -1;
             }
+            //pausing game
+            if (event.keyCode == 32 && !gameOver) {
+              gameStarted = false;
+              $("#clickAnyKey").css({ visibility: "visible" });
+            }
           }
         });
       });
@@ -294,6 +299,16 @@
           <td id="r1c23"></td>
           <td id="r1c24"></td>
           <td id="r1c25"></td>
+          <td id="r1c26"></td>
+          <td id="r1c27"></td>
+          <td id="r1c28"></td>
+          <td id="r1c29"></td>
+          <td id="r1c30"></td>
+          <td id="r1c31"></td>
+          <td id="r1c32"></td>
+          <td id="r1c33"></td>
+          <td id="r1c34"></td>
+          <td id="r1c35"></td>
         </tr>
         <tr>
           <td id="r2c1"></td>

@@ -4,16 +4,92 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
       $(document).ready(function () {
-        $("#r1c1").css({ "background-color": "red" });
+        //grid variables
+        var width = 25; //25 squares wide
+        var hight = 15; //15 squares tall
+
+        //snake variables
+        var snakeHeadColor = "#ff0000"; //red
+        var snakeBodyColor = "#FF8000"; //orange
+        var snakeX = new Array(); //snakes x position
+        snakeX[0] = 10; //head
+        snakeX[1] = 9; //first tail
+        var snakeY = new Array(); //snakes y position
+        snakeY[0] = 10; //head
+        snakeY[1] = 10; //fist tail
+        var velX = 1; //X direction(right)
+        var lastVelX = 1;
+        var lastVelY = 0;
+        var velY = 0; //Y direction (Snake is moving right)
+        var size = 1; //snake size tail section
+
+        //timer variables
+        var timerInterval = 100; //100 ms per frame
+        var timer = setInterval(mainLoop, timerInterval);
+
+        //mainLoop --> Main game loop
+        function mainLoop() {
+          //moves the snake
+          moveSnake();
+        }
+
+        //moveSnake --> moves the Snake
+        function moveSnake() {
+          //erase the tail
+          $("#r" + snakeY[size] + "c" + snakeX[size]).css({
+            "background-color": "#dddddd",
+          });
+          //move the body after the previous section
+          for (var i = size; i > 0; i--) {
+            snakeX[i] = snakeX[i - 1];
+            snakeY[i] = snakeY[i - 1];
+            $("#r" + snakeY[size] + "c" + snakeX[size]).css({
+              "background-color": snakeBodyColor,
+            });
+          }
+          //move snake head
+          snakeX[0] += velX;
+          lastVelX = velX;
+          lastVelY = velY;
+          snakeY[0] += velY;
+          //draw snakes head
+          $("#r" + snakeY[0] + "c" + snakeX[0]).css({
+            "background-color": snakeHeadColor,
+          });
+        }
+
+        //keyDown function (handles key presses)
+        $("body").keydown(function (event) {
+          //right  (x velocity 1, y velocity 0) must be moving up and down
+          if (event.keyCode == 39 && lastVelX == 0) {
+            velX = 1;
+            velY = 0;
+          }
+          //left
+          if (event.keyCode == 37 && lastVelX == 0) {
+            velX = -1;
+            velY = 0;
+          }
+          //down
+          if (event.keyCode == 40 && lastVelY == 0) {
+            velX = 0;
+            velY = 1;
+          }
+          //up
+          if (event.keyCode == 38 && lastVelY == 0) {
+            velX = 0;
+            velY = -1;
+          }
+        });
       });
     </script>
 
     <style>
       table {
         //border-collapse: collapse;
-        background-color: #777777;
+        background-color: #01df01;
         border-radius: 5px;
-        box-shadow: 0 0 10px #ffffff;
+        box-shadow: 0 0 10px #fe2ef7;
         //border: #aaaaaa 1px emboss;
         padding: 1px;
       }
@@ -27,14 +103,14 @@
       }
 
       body {
-        background-color: #555555;
+        background-color: #0b0b61;
       }
       #background {
         padding-left: 50px;
         padding-bottom: 50px;
         padding-top: 0px;
         width: 660px;
-        background-color: #333333;
+        background-color: #0080ff;
         border-radius: 10px;
         box-shadow: 0 0 10px #ffffff;
         margin-left: auto;
@@ -47,8 +123,8 @@
         left: 220px;
         top: 30px;
         font-family: Impact, Charcoal, sans-serif;
-        color: #ffffff;
-        text-shadow: 5px 5px 20px #000000;
+        color: #00ff00;
+        text-shadow: 5px 5px 20px #b45f04;
       }
     </style>
   </head>

@@ -27,10 +27,18 @@
         var timerInterval = 100; //100 ms per frame
         var timer = setInterval(mainLoop, timerInterval);
 
+        //food variables
+        var foodX = 0;
+        var foodY = 0;
+        var foodColor = "#7D3C98";
+        createFood();
+
         //mainLoop --> Main game loop
         function mainLoop() {
           //moves the snake
           moveSnake();
+          //check if snake ate food
+          checkFood();
         }
 
         //moveSnake --> moves the Snake
@@ -57,6 +65,39 @@
             "background-color": snakeHeadColor,
           });
         }
+
+        //check food() --> checks if the snake has hit the food... if so.. increase the snake size and
+        //spawn new food
+        function checkFood() {
+          //did the snake est the food
+          if (snakeX[0] == foodX && snakeY[0] == foodY) {
+            size = size + 3; //add three to snakes size
+            createFood(); //create a new food
+          }
+        }
+
+        //createFood() --> randomly places food on the screen in a way that will not
+        //	be placed on snake
+        function createFood() {
+          var validFood = false; // keeps track of if we have a created a validly placed food
+          //keeps trying until we have a valid food
+          while (!validFood) {
+            //set random values for food
+            foodX = Math.floor(Math.random() * width) + 1;
+            foodY = Math.floor(Math.random() * hight) + 1;
+
+            //assume the food is placed in a good placed
+            validFood = true;
+            //check if the food collides with the snake
+            for (var i = 0; i < size; i++) {
+              if (foodX == snakeX[i] && foodY == snakeY[i]) {
+                validFood = false;
+              } //ends if
+            } //end for loop
+          } //end while loop
+          //draw the food
+          $("#r" + foodY + "c" + foodX).css({ "background-color": foodColor });
+        } //end the function
 
         //keyDown function (handles key presses)
         $("body").keydown(function (event) {
